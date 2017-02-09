@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="841659dffc4a41bf8ffe0b800bf82f5b" Name="Diagram1" >
+        <EntityTypeShape EntityType="WebDevModel.Products" Width="1.5" PointX="2.75" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebDevModel.Categories" Width="1.5" PointX="2.75" PointY="7.125" />
+        <EntityTypeShape EntityType="WebDevModel.Tags" Width="1.5" PointX="0.5" PointY="1" />
+        <EntityTypeShape EntityType="WebDevModel.Orders" Width="1.5" PointX="8.625" PointY="5" />
+        <EntityTypeShape EntityType="WebDevModel.Order_Details" Width="1.5" PointX="5.375" PointY="3.875" />
+        <AssociationConnector Association="WebDevModel.ProductHasCategory" />
+        <AssociationConnector Association="WebDevModel.ProductsOrder_Details" />
+        <AssociationConnector Association="WebDevModel.OrdersOrder_Details" />
+        <EntityTypeShape EntityType="WebDevModel.productTags" Width="1.5" PointX="0.5" PointY="3.375" />
+        <AssociationConnector Association="WebDevModel.TagsEntity1" />
+        <AssociationConnector Association="WebDevModel.ProductsEntity1" />
+        <EntityTypeShape EntityType="WebDevModel.Seller" Width="1.5" PointX="7.5" PointY="2.625" />
+        <EntityTypeShape EntityType="WebDevModel.Buyers" Width="1.5" PointX="10" PointY="3.25" />
+        <EntityTypeShape EntityType="WebDevModel.Ad" Width="1.5" PointX="2.875" PointY="0.5" />
+        <EntityTypeShape EntityType="WebDevModel.Seller_Ads" Width="1.5" PointX="5.25" PointY="1.625" />
+        <AssociationConnector Association="WebDevModel.AdSeller_Ads" />
+        <AssociationConnector Association="WebDevModel.SellerSeller_Ads" />
+        <AssociationConnector Association="WebDevModel.ProductsAd" />
+        <AssociationConnector Association="WebDevModel.BuyersOrders" />
+        <EntityTypeShape EntityType="WebDevModel.PayMethods" Width="1.5" PointX="9.625" PointY="1" />
+        <AssociationConnector Association="WebDevModel.SellerPayMethods" />
+        <EntityTypeShape EntityType="WebDevModel.Report" Width="1.5" PointX="7" PointY="0.5" />
+        <AssociationConnector Association="WebDevModel.SellerReport" />
+        <EntityTypeShape EntityType="WebDevModel.Review" Width="1.5" PointX="5.75" PointY="6.25" />
+        <AssociationConnector Association="WebDevModel.BuyersReport" />
+        <AssociationConnector Association="WebDevModel.ProductsReview" />
+        <AssociationConnector Association="WebDevModel.BuyersReview" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
