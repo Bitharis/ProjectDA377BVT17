@@ -4,11 +4,358 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Namespace="WebDevModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
-        <EntityContainer Name="WebDevModelTargetContainer" >
-        </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+    <Schema Namespace="WebDevModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="WebDevModelStoreContainer">
+    <EntitySet Name="Products" EntityType="WebDevModel.Store.Products" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Categories" EntityType="WebDevModel.Store.Categories" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Tags" EntityType="WebDevModel.Store.Tags" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Orders" EntityType="WebDevModel.Store.Orders" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Order_Details" EntityType="WebDevModel.Store.Order_Details" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="productTags" EntityType="WebDevModel.Store.productTags" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Sellers1" EntityType="WebDevModel.Store.Sellers1" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Buyers" EntityType="WebDevModel.Store.Buyers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Ads" EntityType="WebDevModel.Store.Ads" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Seller_Ads" EntityType="WebDevModel.Store.Seller_Ads" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PayMethods" EntityType="WebDevModel.Store.PayMethods" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Reports" EntityType="WebDevModel.Store.Reports" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Reviews" EntityType="WebDevModel.Store.Reviews" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="CategoriesProducts" Association="WebDevModel.Store.ProductHasCategory">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="ProductsOrder_Details" Association="WebDevModel.Store.ProductsOrder_Details">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="Order_Details" EntitySet="Order_Details" />
+    </AssociationSet>
+    <AssociationSet Name="OrdersOrder_Details" Association="WebDevModel.Store.OrdersOrder_Details">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="Order_Details" EntitySet="Order_Details" />
+    </AssociationSet>
+    <AssociationSet Name="ProductsEntity1" Association="WebDevModel.Store.ProductsEntity1">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="Entity1" EntitySet="productTags" />
+    </AssociationSet>
+    <AssociationSet Name="AdSeller_Ads" Association="WebDevModel.Store.AdSeller_Ads">
+      <End Role="Ad" EntitySet="Ads" />
+      <End Role="Seller_Ads" EntitySet="Seller_Ads" />
+    </AssociationSet>
+    <AssociationSet Name="SellerSeller_Ads" Association="WebDevModel.Store.SellerSeller_Ads">
+      <End Role="Seller" EntitySet="Sellers1" />
+      <End Role="Seller_Ads" EntitySet="Seller_Ads" />
+    </AssociationSet>
+    <AssociationSet Name="ProductsAd" Association="WebDevModel.Store.ProductsAd">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="Ad" EntitySet="Ads" />
+    </AssociationSet>
+    <AssociationSet Name="BuyersOrders" Association="WebDevModel.Store.BuyersOrders">
+      <End Role="Buyers" EntitySet="Buyers" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="SellerPayMethods" Association="WebDevModel.Store.SellerPayMethods">
+      <End Role="Seller" EntitySet="Sellers1" />
+      <End Role="PayMethods" EntitySet="PayMethods" />
+    </AssociationSet>
+    <AssociationSet Name="SellerReport" Association="WebDevModel.Store.SellerReport">
+      <End Role="Seller" EntitySet="Sellers1" />
+      <End Role="Report" EntitySet="Reports" />
+    </AssociationSet>
+    <AssociationSet Name="BuyersReport" Association="WebDevModel.Store.BuyersReport">
+      <End Role="Buyers" EntitySet="Buyers" />
+      <End Role="Report" EntitySet="Reports" />
+    </AssociationSet>
+    <AssociationSet Name="ProductsReview" Association="WebDevModel.Store.ProductsReview">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="Review" EntitySet="Reviews" />
+    </AssociationSet>
+    <AssociationSet Name="BuyersReview" Association="WebDevModel.Store.BuyersReview">
+      <End Role="Buyers" EntitySet="Buyers" />
+      <End Role="Review" EntitySet="Reviews" />
+    </AssociationSet>
+    <AssociationSet Name="TagsproductTags" Association="WebDevModel.Store.TagsproductTags">
+      <End Role="Tags" EntitySet="Tags" />
+      <End Role="productTags" EntitySet="productTags" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Products">
+    <Key>
+      <PropertyRef Name="prod_Id" />
+    </Key>
+    <Property Name="prod_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="prod_name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="prod_price" Type="decimal" Nullable="false" Precision="2" />
+    <Property Name="prod_description" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="prod_active" Type="bit" Nullable="false" DefaultValue="true" />
+    <Property Name="prod_rating" Type="float" Nullable="true" />
+    <Property Name="prod_onstock" Type="int" Nullable="false" DefaultValue="1" />
+    <Property Name="Category_cat_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Categories">
+    <Key>
+      <PropertyRef Name="cat_Id" />
+    </Key>
+    <Property Name="cat_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cat_name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tags">
+    <Key>
+      <PropertyRef Name="tag_Id" />
+    </Key>
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="tag_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="order_Id" />
+    </Key>
+    <Property Name="order_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="order_date" Type="datetime" StoreGeneratedPattern="Computed" Nullable="false" />
+    <Property Name="order_total" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Buyer_buyer_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Order_Details">
+    <Key>
+      <PropertyRef Name="orderdetails_Id" />
+    </Key>
+    <Property Name="orderdetails_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="quantity" Type="int" Nullable="false" />
+    <Property Name="Product_prod_Id" Type="int" Nullable="false" />
+    <Property Name="Order_order_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="productTags">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Product_prod_Id" Type="int" Nullable="false" />
+    <Property Name="Tag_tag_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sellers1">
+    <Key>
+      <PropertyRef Name="seller_Id" />
+    </Key>
+    <Property Name="seller_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="sel_rating" Type="float" Nullable="true" />
+    <Property Name="reported" Type="bit" Nullable="false" DefaultValue="false" />
+  </EntityType>
+  <EntityType Name="Buyers">
+    <Key>
+      <PropertyRef Name="buyer_Id" />
+    </Key>
+    <Property Name="buyer_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="buyer_active" Type="bit" Nullable="false" DefaultValue="true" />
+  </EntityType>
+  <EntityType Name="Ads">
+    <Key>
+      <PropertyRef Name="ad_Id" />
+    </Key>
+    <Property Name="ad_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="active" Type="bit" Nullable="false" DefaultValue="true" />
+    <Property Name="Product_prod_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Seller_Ads">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Ad_ad_Id" Type="int" Nullable="false" />
+    <Property Name="Seller_seller_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PayMethods">
+    <Key>
+      <PropertyRef Name="method_Id" />
+    </Key>
+    <Property Name="method_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="method_name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="method_properties" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Seller_seller_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Reports">
+    <Key>
+      <PropertyRef Name="report_Id" />
+    </Key>
+    <Property Name="report_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Seller_seller_Id" Type="int" Nullable="false" />
+    <Property Name="Buyer_buyer_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Reviews">
+    <Key>
+      <PropertyRef Name="review_Id" />
+    </Key>
+    <Property Name="review_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="review_Text" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Product_prod_Id" Type="int" Nullable="false" />
+    <Property Name="Buyer_buyer_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="ProductHasCategory">
+    <End Role="Categories" Type="WebDevModel.Store.Categories" Multiplicity="1" />
+    <End Role="Products" Type="WebDevModel.Store.Products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categories">
+        <PropertyRef Name="cat_Id" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="Category_cat_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProductsOrder_Details">
+    <End Role="Products" Type="WebDevModel.Store.Products" Multiplicity="1" />
+    <End Role="Order_Details" Type="WebDevModel.Store.Order_Details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="prod_Id" />
+      </Principal>
+      <Dependent Role="Order_Details">
+        <PropertyRef Name="Product_prod_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="OrdersOrder_Details">
+    <End Role="Orders" Type="WebDevModel.Store.Orders" Multiplicity="1" />
+    <End Role="Order_Details" Type="WebDevModel.Store.Order_Details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="order_Id" />
+      </Principal>
+      <Dependent Role="Order_Details">
+        <PropertyRef Name="Order_order_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProductsEntity1">
+    <End Role="Products" Type="WebDevModel.Store.Products" Multiplicity="1" />
+    <End Role="Entity1" Type="WebDevModel.Store.productTags" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="prod_Id" />
+      </Principal>
+      <Dependent Role="Entity1">
+        <PropertyRef Name="Product_prod_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AdSeller_Ads">
+    <End Role="Ad" Type="WebDevModel.Store.Ads" Multiplicity="1" />
+    <End Role="Seller_Ads" Type="WebDevModel.Store.Seller_Ads" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ad">
+        <PropertyRef Name="ad_Id" />
+      </Principal>
+      <Dependent Role="Seller_Ads">
+        <PropertyRef Name="Ad_ad_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SellerSeller_Ads">
+    <End Role="Seller" Type="WebDevModel.Store.Sellers1" Multiplicity="1" />
+    <End Role="Seller_Ads" Type="WebDevModel.Store.Seller_Ads" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Seller">
+        <PropertyRef Name="seller_Id" />
+      </Principal>
+      <Dependent Role="Seller_Ads">
+        <PropertyRef Name="Seller_seller_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProductsAd">
+    <End Role="Products" Type="WebDevModel.Store.Products" Multiplicity="1" />
+    <End Role="Ad" Type="WebDevModel.Store.Ads" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="prod_Id" />
+      </Principal>
+      <Dependent Role="Ad">
+        <PropertyRef Name="Product_prod_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="BuyersOrders">
+    <End Role="Buyers" Type="WebDevModel.Store.Buyers" Multiplicity="1" />
+    <End Role="Orders" Type="WebDevModel.Store.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Buyers">
+        <PropertyRef Name="buyer_Id" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="Buyer_buyer_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SellerPayMethods">
+    <End Role="Seller" Type="WebDevModel.Store.Sellers1" Multiplicity="1" />
+    <End Role="PayMethods" Type="WebDevModel.Store.PayMethods" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Seller">
+        <PropertyRef Name="seller_Id" />
+      </Principal>
+      <Dependent Role="PayMethods">
+        <PropertyRef Name="Seller_seller_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SellerReport">
+    <End Role="Seller" Type="WebDevModel.Store.Sellers1" Multiplicity="1" />
+    <End Role="Report" Type="WebDevModel.Store.Reports" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Seller">
+        <PropertyRef Name="seller_Id" />
+      </Principal>
+      <Dependent Role="Report">
+        <PropertyRef Name="Seller_seller_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="BuyersReport">
+    <End Role="Buyers" Type="WebDevModel.Store.Buyers" Multiplicity="1" />
+    <End Role="Report" Type="WebDevModel.Store.Reports" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Buyers">
+        <PropertyRef Name="buyer_Id" />
+      </Principal>
+      <Dependent Role="Report">
+        <PropertyRef Name="Buyer_buyer_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProductsReview">
+    <End Role="Products" Type="WebDevModel.Store.Products" Multiplicity="1" />
+    <End Role="Review" Type="WebDevModel.Store.Reviews" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="prod_Id" />
+      </Principal>
+      <Dependent Role="Review">
+        <PropertyRef Name="Product_prod_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="BuyersReview">
+    <End Role="Buyers" Type="WebDevModel.Store.Buyers" Multiplicity="1" />
+    <End Role="Review" Type="WebDevModel.Store.Reviews" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Buyers">
+        <PropertyRef Name="buyer_Id" />
+      </Principal>
+      <Dependent Role="Review">
+        <PropertyRef Name="Buyer_buyer_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TagsproductTags">
+    <End Role="Tags" Type="WebDevModel.Store.Tags" Multiplicity="1" />
+    <End Role="productTags" Type="WebDevModel.Store.productTags" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tags">
+        <PropertyRef Name="tag_Id" />
+      </Principal>
+      <Dependent Role="productTags">
+        <PropertyRef Name="Tag_tag_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="WebDevModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
@@ -31,10 +378,6 @@
             <End Role="Order_Details" EntitySet="Order_Details" />
           </AssociationSet>
           <EntitySet Name="productTags" EntityType="WebDevModel.productTags" />
-          <AssociationSet Name="TagsEntity1" Association="WebDevModel.TagsEntity1">
-            <End Role="Tags" EntitySet="Tags" />
-            <End Role="Entity1" EntitySet="productTags" />
-          </AssociationSet>
           <AssociationSet Name="ProductsEntity1" Association="WebDevModel.ProductsEntity1">
             <End Role="Products" EntitySet="Products" />
             <End Role="Entity1" EntitySet="productTags" />
@@ -82,6 +425,10 @@
             <End Role="Buyers" EntitySet="Buyers" />
             <End Role="Review" EntitySet="Reviews" />
           </AssociationSet>
+          <AssociationSet Name="TagsproductTags" Association="WebDevModel.TagsproductTags">
+            <End Role="Tags" EntitySet="Tags" />
+            <End Role="productTags" EntitySet="productTags" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Products">
           <Key>
@@ -97,7 +444,7 @@
           <NavigationProperty Name="Entity1" Relationship="WebDevModel.ProductsEntity1" FromRole="Products" ToRole="Entity1" />
           <NavigationProperty Name="Ads" Relationship="WebDevModel.ProductsAd" FromRole="Products" ToRole="Ad" />
           <Property Name="prod_rating" Type="Double" Nullable="true" />
-          <Property Name="prod_available" Type="Int32" Nullable="false" DefaultValue="1" />
+          <Property Name="prod_onstock" Type="Int32" Nullable="false" DefaultValue="1" />
           <NavigationProperty Name="Reviews" Relationship="WebDevModel.ProductsReview" FromRole="Products" ToRole="Review" />
         </EntityType>
         <EntityType Name="Categories">
@@ -110,10 +457,11 @@
         </EntityType>
         <EntityType Name="Tags">
           <Key>
-            <PropertyRef Name="name" />
+            <PropertyRef Name="tag_Id" />
           </Key>
-          <Property Name="name" Type="String" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Entity1" Relationship="WebDevModel.TagsEntity1" FromRole="Tags" ToRole="Entity1" />
+          <Property Name="name" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="tag_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="productTags" Relationship="WebDevModel.TagsproductTags" FromRole="Tags" ToRole="productTags" />
         </EntityType>
         <EntityType Name="Orders">
           <Key>
@@ -151,13 +499,9 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Tag" Relationship="WebDevModel.TagsEntity1" FromRole="Entity1" ToRole="Tags" />
           <NavigationProperty Name="Product" Relationship="WebDevModel.ProductsEntity1" FromRole="Entity1" ToRole="Products" />
+          <NavigationProperty Name="Tag" Relationship="WebDevModel.TagsproductTags" FromRole="productTags" ToRole="Tags" />
         </EntityType>
-        <Association Name="TagsEntity1">
-          <End Type="WebDevModel.Tags" Role="Tags" Multiplicity="1" />
-          <End Type="WebDevModel.productTags" Role="Entity1" Multiplicity="*" />
-        </Association>
         <Association Name="ProductsEntity1">
           <End Type="WebDevModel.Products" Role="Products" Multiplicity="1" />
           <End Type="WebDevModel.productTags" Role="Entity1" Multiplicity="*" />
@@ -181,6 +525,7 @@
           <NavigationProperty Name="Orders" Relationship="WebDevModel.BuyersOrders" FromRole="Buyers" ToRole="Orders" />
           <NavigationProperty Name="Reports" Relationship="WebDevModel.BuyersReport" FromRole="Buyers" ToRole="Report" />
           <NavigationProperty Name="Reviews" Relationship="WebDevModel.BuyersReview" FromRole="Buyers" ToRole="Review" />
+          <Property Name="buyer_active" Type="Boolean" Nullable="false" DefaultValue="true" />
         </EntityType>
         <EntityType Name="Ad">
           <Key>
@@ -262,17 +607,240 @@
           <End Type="WebDevModel.Buyers" Role="Buyers" Multiplicity="1" />
           <End Type="WebDevModel.Review" Role="Review" Multiplicity="*" />
         </Association>
+        <Association Name="TagsproductTags">
+          <End Type="WebDevModel.Tags" Role="Tags" Multiplicity="1" />
+          <End Type="WebDevModel.productTags" Role="productTags" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
-        <Alias Key="Model" Value="WebDevModel" />
-        <Alias Key="Target" Value="WebDevModel.Store" />
-        <EntityContainerMapping CdmEntityContainer="WebDevModelContainer" StorageEntityContainer="WebDevModelTargetContainer">
-        </EntityContainerMapping>
-      </Mapping>
-    </edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="WebDevModelStoreContainer" CdmEntityContainer="WebDevModelContainer">
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="IsTypeOf(WebDevModel.Products)">
+        <MappingFragment StoreEntitySet="Products">
+          <ScalarProperty Name="prod_Id" ColumnName="prod_Id" />
+          <ScalarProperty Name="prod_name" ColumnName="prod_name" />
+          <ScalarProperty Name="prod_price" ColumnName="prod_price" />
+          <ScalarProperty Name="prod_description" ColumnName="prod_description" />
+          <ScalarProperty Name="prod_active" ColumnName="prod_active" />
+          <ScalarProperty Name="prod_rating" ColumnName="prod_rating" />
+          <ScalarProperty Name="prod_onstock" ColumnName="prod_onstock" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="IsTypeOf(WebDevModel.Categories)">
+        <MappingFragment StoreEntitySet="Categories">
+          <ScalarProperty Name="cat_Id" ColumnName="cat_Id" />
+          <ScalarProperty Name="cat_name" ColumnName="cat_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tags">
+      <EntityTypeMapping TypeName="IsTypeOf(WebDevModel.Tags)">
+        <MappingFragment StoreEntitySet="Tags">
+          <ScalarProperty Name="tag_Id" ColumnName="tag_Id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="IsTypeOf(WebDevModel.Orders)">
+        <MappingFragment StoreEntitySet="Orders">
+          <ScalarProperty Name="order_Id" ColumnName="order_Id" />
+          <ScalarProperty Name="order_date" ColumnName="order_date" />
+          <ScalarProperty Name="order_total" ColumnName="order_total" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Order_Details">
+      <EntityTypeMapping TypeName="IsTypeOf(WebDevModel.Order_Details)">
+        <MappingFragment StoreEntitySet="Order_Details">
+          <ScalarProperty Name="orderdetails_Id" ColumnName="orderdetails_Id" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="productTags">
+      <EntityTypeMapping TypeName="IsTypeOf(WebDevModel.productTags)">
+        <MappingFragment StoreEntitySet="productTags">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sellers1">
+      <EntityTypeMapping TypeName="IsTypeOf(WebDevModel.Seller)">
+        <MappingFragment StoreEntitySet="Sellers1">
+          <ScalarProperty Name="seller_Id" ColumnName="seller_Id" />
+          <ScalarProperty Name="sel_rating" ColumnName="sel_rating" />
+          <ScalarProperty Name="reported" ColumnName="reported" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Buyers">
+      <EntityTypeMapping TypeName="IsTypeOf(WebDevModel.Buyers)">
+        <MappingFragment StoreEntitySet="Buyers">
+          <ScalarProperty Name="buyer_Id" ColumnName="buyer_Id" />
+          <ScalarProperty Name="buyer_active" ColumnName="buyer_active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ads">
+      <EntityTypeMapping TypeName="IsTypeOf(WebDevModel.Ad)">
+        <MappingFragment StoreEntitySet="Ads">
+          <ScalarProperty Name="ad_Id" ColumnName="ad_Id" />
+          <ScalarProperty Name="active" ColumnName="active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Seller_Ads">
+      <EntityTypeMapping TypeName="IsTypeOf(WebDevModel.Seller_Ads)">
+        <MappingFragment StoreEntitySet="Seller_Ads">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PayMethods">
+      <EntityTypeMapping TypeName="IsTypeOf(WebDevModel.PayMethods)">
+        <MappingFragment StoreEntitySet="PayMethods">
+          <ScalarProperty Name="method_Id" ColumnName="method_Id" />
+          <ScalarProperty Name="method_name" ColumnName="method_name" />
+          <ScalarProperty Name="method_properties" ColumnName="method_properties" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reports">
+      <EntityTypeMapping TypeName="IsTypeOf(WebDevModel.Report)">
+        <MappingFragment StoreEntitySet="Reports">
+          <ScalarProperty Name="report_Id" ColumnName="report_Id" />
+          <ScalarProperty Name="description" ColumnName="description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reviews">
+      <EntityTypeMapping TypeName="IsTypeOf(WebDevModel.Review)">
+        <MappingFragment StoreEntitySet="Reviews">
+          <ScalarProperty Name="review_Id" ColumnName="review_Id" />
+          <ScalarProperty Name="review_Text" ColumnName="review_Text" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="CategoriesProducts" TypeName="WebDevModel.ProductHasCategory" StoreEntitySet="Products">
+      <EndProperty Name="Categories">
+        <ScalarProperty Name="cat_Id" ColumnName="Category_cat_Id" />
+      </EndProperty>
+      <EndProperty Name="Products">
+        <ScalarProperty Name="prod_Id" ColumnName="prod_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ProductsOrder_Details" TypeName="WebDevModel.ProductsOrder_Details" StoreEntitySet="Order_Details">
+      <EndProperty Name="Products">
+        <ScalarProperty Name="prod_Id" ColumnName="Product_prod_Id" />
+      </EndProperty>
+      <EndProperty Name="Order_Details">
+        <ScalarProperty Name="orderdetails_Id" ColumnName="orderdetails_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="OrdersOrder_Details" TypeName="WebDevModel.OrdersOrder_Details" StoreEntitySet="Order_Details">
+      <EndProperty Name="Orders">
+        <ScalarProperty Name="order_Id" ColumnName="Order_order_Id" />
+      </EndProperty>
+      <EndProperty Name="Order_Details">
+        <ScalarProperty Name="orderdetails_Id" ColumnName="orderdetails_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ProductsEntity1" TypeName="WebDevModel.ProductsEntity1" StoreEntitySet="productTags">
+      <EndProperty Name="Products">
+        <ScalarProperty Name="prod_Id" ColumnName="Product_prod_Id" />
+      </EndProperty>
+      <EndProperty Name="Entity1">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="AdSeller_Ads" TypeName="WebDevModel.AdSeller_Ads" StoreEntitySet="Seller_Ads">
+      <EndProperty Name="Ad">
+        <ScalarProperty Name="ad_Id" ColumnName="Ad_ad_Id" />
+      </EndProperty>
+      <EndProperty Name="Seller_Ads">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="SellerSeller_Ads" TypeName="WebDevModel.SellerSeller_Ads" StoreEntitySet="Seller_Ads">
+      <EndProperty Name="Seller">
+        <ScalarProperty Name="seller_Id" ColumnName="Seller_seller_Id" />
+      </EndProperty>
+      <EndProperty Name="Seller_Ads">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ProductsAd" TypeName="WebDevModel.ProductsAd" StoreEntitySet="Ads">
+      <EndProperty Name="Products">
+        <ScalarProperty Name="prod_Id" ColumnName="Product_prod_Id" />
+      </EndProperty>
+      <EndProperty Name="Ad">
+        <ScalarProperty Name="ad_Id" ColumnName="ad_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="BuyersOrders" TypeName="WebDevModel.BuyersOrders" StoreEntitySet="Orders">
+      <EndProperty Name="Buyers">
+        <ScalarProperty Name="buyer_Id" ColumnName="Buyer_buyer_Id" />
+      </EndProperty>
+      <EndProperty Name="Orders">
+        <ScalarProperty Name="order_Id" ColumnName="order_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="SellerPayMethods" TypeName="WebDevModel.SellerPayMethods" StoreEntitySet="PayMethods">
+      <EndProperty Name="Seller">
+        <ScalarProperty Name="seller_Id" ColumnName="Seller_seller_Id" />
+      </EndProperty>
+      <EndProperty Name="PayMethods">
+        <ScalarProperty Name="method_Id" ColumnName="method_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="SellerReport" TypeName="WebDevModel.SellerReport" StoreEntitySet="Reports">
+      <EndProperty Name="Seller">
+        <ScalarProperty Name="seller_Id" ColumnName="Seller_seller_Id" />
+      </EndProperty>
+      <EndProperty Name="Report">
+        <ScalarProperty Name="report_Id" ColumnName="report_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="BuyersReport" TypeName="WebDevModel.BuyersReport" StoreEntitySet="Reports">
+      <EndProperty Name="Buyers">
+        <ScalarProperty Name="buyer_Id" ColumnName="Buyer_buyer_Id" />
+      </EndProperty>
+      <EndProperty Name="Report">
+        <ScalarProperty Name="report_Id" ColumnName="report_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ProductsReview" TypeName="WebDevModel.ProductsReview" StoreEntitySet="Reviews">
+      <EndProperty Name="Products">
+        <ScalarProperty Name="prod_Id" ColumnName="Product_prod_Id" />
+      </EndProperty>
+      <EndProperty Name="Review">
+        <ScalarProperty Name="review_Id" ColumnName="review_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="BuyersReview" TypeName="WebDevModel.BuyersReview" StoreEntitySet="Reviews">
+      <EndProperty Name="Buyers">
+        <ScalarProperty Name="buyer_Id" ColumnName="Buyer_buyer_Id" />
+      </EndProperty>
+      <EndProperty Name="Review">
+        <ScalarProperty Name="review_Id" ColumnName="review_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="TagsproductTags" TypeName="WebDevModel.TagsproductTags" StoreEntitySet="productTags">
+      <EndProperty Name="Tags">
+        <ScalarProperty Name="tag_Id" ColumnName="Tag_tag_Id" />
+      </EndProperty>
+      <EndProperty Name="productTags">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
@@ -286,6 +854,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
       </DesignerInfoPropertySet>
     </edmx:Options>
     <!-- Diagram content (shape and connector positions) -->

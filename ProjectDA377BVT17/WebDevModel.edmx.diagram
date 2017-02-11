@@ -14,12 +14,11 @@
         <AssociationConnector Association="WebDevModel.ProductsOrder_Details" />
         <AssociationConnector Association="WebDevModel.OrdersOrder_Details" />
         <EntityTypeShape EntityType="WebDevModel.productTags" Width="1.5" PointX="0.5" PointY="3.375" />
-        <AssociationConnector Association="WebDevModel.TagsEntity1" />
         <AssociationConnector Association="WebDevModel.ProductsEntity1" />
         <EntityTypeShape EntityType="WebDevModel.Seller" Width="1.5" PointX="7.5" PointY="2.625" />
-        <EntityTypeShape EntityType="WebDevModel.Buyers" Width="1.5" PointX="10" PointY="3.25" />
+        <EntityTypeShape EntityType="WebDevModel.Buyers" Width="1.5" PointX="11.625" PointY="3.125" />
         <EntityTypeShape EntityType="WebDevModel.Ad" Width="1.5" PointX="2.875" PointY="0.5" />
-        <EntityTypeShape EntityType="WebDevModel.Seller_Ads" Width="1.5" PointX="5.25" PointY="1.625" />
+        <EntityTypeShape EntityType="WebDevModel.Seller_Ads" Width="1.5" PointX="5" PointY="1.625" />
         <AssociationConnector Association="WebDevModel.AdSeller_Ads" />
         <AssociationConnector Association="WebDevModel.SellerSeller_Ads" />
         <AssociationConnector Association="WebDevModel.ProductsAd" />
@@ -32,6 +31,7 @@
         <AssociationConnector Association="WebDevModel.BuyersReport" />
         <AssociationConnector Association="WebDevModel.ProductsReview" />
         <AssociationConnector Association="WebDevModel.BuyersReview" />
+        <AssociationConnector Association="WebDevModel.TagsproductTags" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

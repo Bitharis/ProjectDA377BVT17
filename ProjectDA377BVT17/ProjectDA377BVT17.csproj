@@ -112,6 +112,17 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="WebDevModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>WebDevModel.Context.cs</LastGenOutput>
+      <DependentUpon>WebDevModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="WebDevModel.edmx.sql" />
+    <Content Include="WebDevModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>WebDevModel.cs</LastGenOutput>
+      <DependentUpon>WebDevModel.edmx</DependentUpon>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -133,10 +144,49 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ad.cs">
+      <DependentUpon>WebDevModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Buyers.cs">
+      <DependentUpon>WebDevModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Categories.cs">
+      <DependentUpon>WebDevModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Orders.cs">
+      <DependentUpon>WebDevModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Order_Details.cs">
+      <DependentUpon>WebDevModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PayMethods.cs">
+      <DependentUpon>WebDevModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Products.cs">
+      <DependentUpon>WebDevModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="productTags.cs">
+      <DependentUpon>WebDevModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Report.cs">
+      <DependentUpon>WebDevModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Review.cs">
+      <DependentUpon>WebDevModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Seller.cs">
+      <DependentUpon>WebDevModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Seller_Ads.cs">
+      <DependentUpon>WebDevModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Tags.cs">
+      <DependentUpon>WebDevModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Views\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -151,6 +201,16 @@
     <Compile Include="Views\SignUp.aspx.designer.cs">
       <DependentUpon>SignUp.aspx</DependentUpon>
     </Compile>
+    <Compile Include="WebDevModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WebDevModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WebDevModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WebDevModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="WebDevModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -160,6 +220,9 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
